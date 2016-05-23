@@ -17,11 +17,13 @@
 
   var hide = function(callback) {
     $(".weui_mask_transparent").remove();
-    $(".weui_toast_visible").removeClass("weui_toast_visible").transitionEnd(function() {
-      var $this = $(this);
-      $this.remove();
-      callback && callback($this);
-    });
+    $(".weui_toast_visible").removeClass("weui_toast_visible").each(function(){
+        $(this).transitionEnd(function() {
+          var $this = $(this);
+          $this.remove();
+          callback && callback($this);
+        });
+    })
   }
 
   $.toast = function(text, style, callback) {
